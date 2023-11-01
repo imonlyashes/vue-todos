@@ -27,3 +27,7 @@ npm run dev
 ```sh
 npm run build
 ```
+
+## Project source
+
+This project was done following [this tutorial](https://www.youtube.com/watch?v=KTFH4P8unUQ) by John Komarnicki to help me have a better understanding of Vue 3.
