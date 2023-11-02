@@ -15,15 +15,39 @@
       isEditing: null
     });
   };
+
+  const toggleTodoComplete = (todoPos) => {
+    todoList.value[todoPos].isCompleted = !todoList.value[todoPos].isCompleted;
+  };
+
+  const toggleEditTodo = (todoPos) => {
+    todoList.value[todoPos].isEditing = !todoList.value[todoPos].isEditing;
+  }
+
+  const updateTodo = (todoVal, todoPos) => {
+    todoList.value[todoPos].todo = todoVal;
+  }
+
+  const deleteTodo = (todoId) => {
+    todoList.value = todoList.value.filter((todo) => todo.id !== todoId);
+  }
 </script>
 
 <template>
   <main>
     <h1>Create Todo</h1>
-    <!-- Using the custom emit event from TodoCreator to run the createTodo function -->
     <TodoCreator @create-todo="createTodo" />
+    <!-- Making sure there's todos in the list and show a message if there's none -->
     <ul class="todo-list" v-if="todoList.length > 0">
-      <TodoItem v-for="todo in todoList" :todo="todo" />
+      <TodoItem 
+        v-for="(todo, index) in todoList" 
+        :todo="todo" 
+        :index="index" 
+        @toggle-complete="toggleTodoComplete" 
+        @edit-todo="toggleEditTodo"
+        @update-todo="updateTodo"
+        @delete-todo="deleteTodo"
+      />
     </ul>
     <p class="todos-msg" v-else>
       <Icon icon="noto-v1:sad-but-relieved-face" width="22" />
