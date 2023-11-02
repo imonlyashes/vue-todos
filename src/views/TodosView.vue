@@ -1,11 +1,41 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, watch, computed } from 'vue';
   import { uid } from 'uid';
   import { Icon } from '@iconify/vue';
   import TodoCreator from '../components/TodoCreator.vue';
   import TodoItem from '../components/TodoItem.vue';
 
   const todoList = ref([]);
+
+  /* 
+  HAVING AN ISSUE WITH THIS PART OF THE TUTORIAL THAT BUG EVERYTHING
+  STILL WORKING ON IT
+  
+  watch(todoList, () => {
+    setTodoListLocalStorage();
+  }, {
+    deep: true,
+  });
+
+  const fetchTodoList = () => {
+  const savedTodoList = JSON.parse(localStorage.getItem("todoList"));
+  if (savedTodoList) {
+  todoList.value = savedTodoList;
+    }
+  };
+
+  fetchTodoList();
+
+  const setTodoListLocalStorage = () => {
+    localStorage.setItem("todoList", JSON.stringify(todoList.value));
+  };
+  */
+
+  
+  // Loop in all the todos in the array to see if they're all completed
+  const todoCompleted = computed(() => {
+    return todoList.value.every((todo) => todo.isCompleted);
+  });
 
   const createTodo = (todo) => {
     todoList.value.push({
@@ -22,20 +52,20 @@
 
   const toggleEditTodo = (todoPos) => {
     todoList.value[todoPos].isEditing = !todoList.value[todoPos].isEditing;
-  }
+  };
 
   const updateTodo = (todoVal, todoPos) => {
     todoList.value[todoPos].todo = todoVal;
-  }
+  };
 
   const deleteTodo = (todoId) => {
     todoList.value = todoList.value.filter((todo) => todo.id !== todoId);
-  }
+  };
 </script>
 
 <template>
   <main>
-    <h1>Create Todo</h1>
+    <h2>Create Todo</h2>
     <TodoCreator @create-todo="createTodo" />
     <!-- Making sure there's todos in the list and show a message if there's none -->
     <ul class="todo-list" v-if="todoList.length > 0">
@@ -53,6 +83,11 @@
       <Icon icon="noto-v1:sad-but-relieved-face" width="22" />
       <span>You have no todo's to complete! Add one!</span>
     </p>
+    <!-- Tracking if all the todos are completed and showing a message if they are -->
+    <p v-if="todoCompleted && todoList.length > 0" class="todos-msg">
+      <Icon icon="noto-v1:party-popper" />
+      <span>You have completed all your todos!</span>
+    </p>
   </main>
 </template>
 
@@ -65,7 +100,7 @@
     margin: 0 auto;
     padding: 40px 16px;
 
-    h1 {
+    h2 {
       margin-bottom: 16px;
       text-align: center;
     }
