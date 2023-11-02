@@ -28,6 +28,6 @@ npm run dev
 npm run build
 ```
 
-## Project source
+## The Project
 
-This project was done following [this tutorial](https://www.youtube.com/watch?v=KTFH4P8unUQ) by John Komarnicki to help me have a better understanding of Vue 3.
+This project was done following [this tutorial](https://www.youtube.com/watch?v=KTFH4P8unUQ) by John Komarnicki to help me have a better understanding of Vue 3. I plan to still work on it to adjust it my way while I keep learning!

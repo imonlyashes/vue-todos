@@ -1,15 +1,29 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="container">
+    <h2>About the project</h2>
+    <p>
+      This project was done following <a href="https://www.youtube.com/watch?v=KTFH4P8unUQ" target="_blank">this tutorial</a> by John Komarnicki to help me have a better understanding of Vue 3. I plan to still work on it to adjust it my way while I keep learning!
+    </p>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+<style lang="scss" scoped>
+  .container {
+    width: 80vw;
+    padding: 20px;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: black;
+      font-weight: bold;
+
+      &:hover {
+        color: #41b080;
+      }
+    }
   }
-}
 </style>
